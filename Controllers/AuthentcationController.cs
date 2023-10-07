@@ -86,17 +86,17 @@ namespace TrustCare.Controllers
                 switch (auth.RoleId)
                 {
                     case 1:
-                        HttpContext.Session.SetString("FirstName", account.FirstName); 
-                        HttpContext.Session.SetString("LastName", account.LastName);
-                        HttpContext.Session.SetString("UserName", account.UserName);
+                        HttpContext.Session.SetString("FirstName", auth.FirstName); 
+                        HttpContext.Session.SetString("LastName", auth.LastName);
+                        HttpContext.Session.SetString("UserName", auth.UserName);
+                        HttpContext.Session.SetString("ProfileImage", auth.ProfileImage);
 
                         return RedirectToAction("Index", "Admin");
                     case 2:
                         //Var fname = int value 
-                        HttpContext.Session.SetString("FirstName", account.FirstName);
-                        HttpContext.Session.SetString("LastName", account.LastName);
+                        HttpContext.Session.SetString("FirstName", auth.FirstName);
+                        HttpContext.Session.SetString("LastName", auth.LastName);
                         HttpContext.Session.SetString("UserName", auth.UserName);
-                        //HttpContext.Session.SetString("ProfileImage", account.ImageFile);
                         return RedirectToAction("Index", "Home");
 
 
