@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <p style="color:red">@ViewBag.Error</p>
+                                <p style="color:red">@ViewBag.Error2</p>
                                 <button class="btn btn-primary py-3 px-5" type="submit">
                                     Register
                                 </button>
@@ -261,8 +261,15 @@
                                         <input asp-for="Password" type="password" class="form-control" />
                                         <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                    </div>
+                                    <p style="color:red">
+                                        @ViewBag.Error
+                                    </p>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Login</button>
+                                        <input type="submit" value="Login" class="btn btn-primary" />
                                     </div>
                                 </form>
                             </div>

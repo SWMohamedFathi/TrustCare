@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using TrustCare.Models;
 
 namespace TrustCare.Controllers
@@ -50,7 +51,7 @@ namespace TrustCare.Controllers
             return View();
         }
 
-        public IActionResult login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -59,14 +60,6 @@ namespace TrustCare.Controllers
         {
             return View();
         }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
 
 
         [HttpPost]
@@ -144,10 +137,20 @@ namespace TrustCare.Controllers
 
             else
             {
-
+                ViewBag.Error = "Wrong username or password.";
             }
 
             return View();
         }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+    
     }
 }
