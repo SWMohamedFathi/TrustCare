@@ -46,12 +46,12 @@ namespace TrustCare.Controllers
             return View();
         }
 
-        public IActionResult Register()
+        public IActionResult Reg()
         {
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Log()
         {
             return View();
         }
@@ -61,6 +61,13 @@ namespace TrustCare.Controllers
             return View();
         }
 
+
+       
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -143,14 +150,7 @@ namespace TrustCare.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
 
 
-
-    
     }
 }
