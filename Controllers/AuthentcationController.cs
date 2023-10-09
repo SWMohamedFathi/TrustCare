@@ -22,56 +22,56 @@ namespace TrustCare.Controllers
         }
 
 
-        public IActionResult Register()
-        {
-            return View();
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //public IActionResult Register()
+        //{
+        //    return View();
+        //}
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("UserId,RoleId,ProfileImage,UserName,Password,Email,FirstName,LastName,Phone,Dateofbirth,ImageFile")] User user )
-        {
-            if (ModelState.IsValid)
-            {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Register([Bind("UserId,RoleId,ProfileImage,UserName,Password,Email,FirstName,LastName,Phone,Dateofbirth,ImageFile")] User user )
+        //{
+        //    if (ModelState.IsValid)
+        //    {
 
-                if (user.ImageFile != null)
-                {
-                    string wwwRootPath = webHostEnvironment.WebRootPath;
+        //        if (user.ImageFile != null)
+        //        {
+        //            string wwwRootPath = webHostEnvironment.WebRootPath;
 
-                    string fileName = Guid.NewGuid().ToString() + user.ImageFile.FileName;
+        //            string fileName = Guid.NewGuid().ToString() + user.ImageFile.FileName;
 
-                    string path = Path.Combine(wwwRootPath + "/Images/" + fileName);
+        //            string path = Path.Combine(wwwRootPath + "/Images/" + fileName);
 
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await user.ImageFile.CopyToAsync(fileStream);
-                    }
+        //            using (var fileStream = new FileStream(path, FileMode.Create))
+        //            {
+        //                await user.ImageFile.CopyToAsync(fileStream);
+        //            }
 
-                    user.ProfileImage = fileName;
-                }
-                var account = _context.Users.Where(x => x.UserName == user.UserName &&  x.Email == user.Email).FirstOrDefault();
-                if(account == null) {
+        //            user.ProfileImage = fileName;
+        //        }
+        //        var account = _context.Users.Where(x => x.UserName == user.UserName &&  x.Email == user.Email).FirstOrDefault();
+        //        if(account == null) {
      
-                    user.RoleId = 2;
-                    _context.Add(user);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
-                }
+        //            user.RoleId = 2;
+        //            _context.Add(user);
+        //            await _context.SaveChangesAsync();
+        //            return RedirectToAction("Index", "Home");
+        //        }
 
-                else
-                {
-                    ViewBag.Error = "Email is already used, please try another  one.";
-                }
+        //        else
+        //        {
+        //            ViewBag.Error = "Email is already used, please try another  one.";
+        //        }
 
               
-            }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", user.RoleId);
-            return View(user);
-        }
+        //    }
+        //    ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", user.RoleId);
+        //    return View(user);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -86,17 +86,17 @@ namespace TrustCare.Controllers
                 switch (auth.RoleId)
                 {
                     case 1:
-                        HttpContext.Session.SetString("FirstName", account.FirstName); 
-                        HttpContext.Session.SetString("LastName", account.LastName);
-                        HttpContext.Session.SetString("UserName", account.UserName);
+                        HttpContext.Session.SetString("FirstName", auth.FirstName); 
+                        HttpContext.Session.SetString("LastName", auth.LastName);
+                        HttpContext.Session.SetString("UserName", auth.UserName);
+                        HttpContext.Session.SetString("ProfileImage", auth.ProfileImage);
 
                         return RedirectToAction("Index", "Admin");
                     case 2:
                         //Var fname = int value 
-                        HttpContext.Session.SetString("FirstName", account.FirstName);
-                        HttpContext.Session.SetString("LastName", account.LastName);
+                        HttpContext.Session.SetString("FirstName", auth.FirstName);
+                        HttpContext.Session.SetString("LastName", auth.LastName);
                         HttpContext.Session.SetString("UserName", auth.UserName);
-                        //HttpContext.Session.SetString("ProfileImage", account.ImageFile);
                         return RedirectToAction("Index", "Home");
 
 
