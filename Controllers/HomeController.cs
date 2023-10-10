@@ -144,11 +144,12 @@ namespace TrustCare.Controllers
 
             else
             {
+
                 ViewBag.Wrong = "Email is already used, please try another  one.";
 
             }
 
-            return View();
+            return View(user);
         }
 
 
