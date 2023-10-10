@@ -221,8 +221,10 @@
                                     <label for="DateOfBirth">Date of Birth</label>
                                 </div>
                             </div>
+                            <p style="color:red">@ViewBag.Wrong</p>
+
                             <div class="col-12">
-                                <p style="color:red">@ViewBag.Error2</p>
+                                <p style="color:red">@ViewBag.Wrong</p>
                                 <button class="btn btn-primary py-3 px-5" type="submit">
                                     Register
                                 </button>
@@ -236,7 +238,7 @@
 
     
 
-    <!-- modal login -->
+ <!-- modal login -->
 
     <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -266,7 +268,7 @@
                                         <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                                     </div>
                                     <p style="color:red">
-                                        @ViewBag.Error
+                                        @ViewBag.Wrong
                                     </p>
                                     <div class="text-center">
                                         <input type="submit" value="Login" class="btn btn-primary" />

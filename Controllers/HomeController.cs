@@ -46,12 +46,12 @@ namespace TrustCare.Controllers
             return View();
         }
 
-        public IActionResult Reg()
+        public IActionResult Register()
         {
             return View();
         }
 
-        public IActionResult Log()
+        public IActionResult Login()
         {
             return View();
         }
@@ -110,8 +110,8 @@ namespace TrustCare.Controllers
             }
             ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", user.RoleId);
             return View(user);
-
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("UserName,Password")] User user)
@@ -144,7 +144,8 @@ namespace TrustCare.Controllers
 
             else
             {
-                ViewBag.Error = "Wrong username or password.";
+                ViewBag.Wrong = "Email is already used, please try another  one.";
+
             }
 
             return View();
@@ -152,5 +153,5 @@ namespace TrustCare.Controllers
 
 
 
-    }
+}
 }
