@@ -105,7 +105,9 @@ namespace TrustCare.Controllers
 
                 else
                 {
-                    
+
+                ViewBag.Wrong = "Wrong username or password.";
+
                 }
 
             return View();

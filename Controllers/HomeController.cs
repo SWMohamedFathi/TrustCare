@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using TrustCare.Models;
 
@@ -6,11 +7,13 @@ namespace TrustCare.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ModelContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ModelContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -29,7 +32,7 @@ namespace TrustCare.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult ContactUs()
         {
             return View();
         }
@@ -38,6 +41,30 @@ namespace TrustCare.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ContactUs([Bind("ContactId,Name,Subject,Address,Phone,Email,MapLocation")] ContactU contactU)
+        {
+            if (ModelState.IsValid)
+            {
+                var account = _context.ContactUs;
+                if (account == null)
+                {
+
+
+                    ViewBag.send = "Well Done!";
+
+
+                }
+                _context.Add(contactU);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("ContactUs", "Home");
+
+            }
+
+         
+            return View(contactU);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
