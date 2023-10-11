@@ -55,7 +55,7 @@ namespace TrustCare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContactId,Name,Subject,Address,Phone,Email,MapLocation")] ContactU contactU)
+        public async Task<IActionResult> Create([Bind("ContactId,Name,Subject,Address,Phone,Email,Message")] ContactU contactU)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace TrustCare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(decimal id, [Bind("ContactId,Name,Subject,Address,Phone,Email,MapLocation")] ContactU contactU)
+        public async Task<IActionResult> Edit(decimal id, [Bind("ContactId,Name,Subject,Address,Phone,Email,Message")] ContactU contactU)
         {
             if (id != contactU.ContactId)
             {

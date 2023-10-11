@@ -18,6 +18,8 @@ namespace TrustCare.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.CurrentTime = DateTime.Now;
+
             return View();
         }
 
@@ -43,26 +45,27 @@ namespace TrustCare.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ContactUs([Bind("ContactId,Name,Subject,Address,Phone,Email,MapLocation")] ContactU contactU)
+        public async Task<IActionResult> ContactUs([Bind("ContactId,Name,Subject,Address,Phone,Email,Message")] ContactU contactU)
         {
             if (ModelState.IsValid)
             {
-                var account = _context.ContactUs;
-                if (account == null)
-                {
 
 
-                    ViewBag.send = "Well Done!";
 
-
-                }
                 _context.Add(contactU);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("ContactUs", "Home");
+
+
+                ViewBag.SuccessMessage = "Well Done..!";
+
+                //return RedirectToAction("ContactUs", "Home");
+
 
             }
 
-         
+
+
+
             return View(contactU);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

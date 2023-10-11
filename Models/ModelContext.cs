@@ -144,10 +144,10 @@ public partial class ModelContext : DbContext
                 .HasMaxLength(200)
                 .IsUnicode(false)
                 .HasColumnName("EMAIL");
-            entity.Property(e => e.MapLocation)
+            entity.Property(e => e.Message)
                 .HasMaxLength(1000)
                 .IsUnicode(false)
-                .HasColumnName("MAP_LOCATION");
+                .HasColumnName("MESSAGE");
             entity.Property(e => e.Name)
                 .HasMaxLength(200)
                 .IsUnicode(false)

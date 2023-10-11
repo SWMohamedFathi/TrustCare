@@ -17,5 +17,5 @@ public partial class ContactU
 
     public string? Email { get; set; }
 
-    public string? MapLocation { get; set; }
+    public string? Message { get; set; }
 }
