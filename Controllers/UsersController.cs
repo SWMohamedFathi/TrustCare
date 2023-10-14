@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +13,13 @@ namespace TrustCare.Controllers
 {
     public class UsersController : Controller
     {
+        private readonly UserManager<User> _userManager;
         private readonly ModelContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
-        public UsersController(ModelContext context, IWebHostEnvironment webHostEnvironment)
-        {   
+        public UsersController(UserManager<User> userManager, ModelContext context, IWebHostEnvironment webHostEnvironment)
+        {
+            _userManager = userManager;
+
             _context = context;
             this.webHostEnvironment = webHostEnvironment;
         }
@@ -188,14 +193,15 @@ namespace TrustCare.Controllers
             {
                 _context.Users.Remove(user);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(decimal id)
         {
-          return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
+            return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         }
+
     }
 }

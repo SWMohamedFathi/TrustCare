@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TrustCare.Models;
+using Microsoft.AspNetCore.Identity;
+using TrustCare.Data;
+
+
 
 namespace TrustCare
 {
@@ -12,6 +16,11 @@ namespace TrustCare
             // Add services to the container.
             builder.Services.AddControllersWithViews();           
            builder.Services.AddDbContext<ModelContext>(options => options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<ModelContext>();
+        
             builder.Services.AddSession(options => {
 
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
@@ -31,6 +40,7 @@ namespace TrustCare
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
+                        app.UseAuthentication();;
 
             app.UseAuthorization();
 
@@ -39,6 +49,9 @@ namespace TrustCare
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
+         
+
         }
     }
 }

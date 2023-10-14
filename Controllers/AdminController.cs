@@ -17,11 +17,20 @@ namespace TrustCare.Controllers
         {
 
             ViewBag.UsersCount = _context.Users.Count();
+            ViewBag.SubCount = _context.Subscriptions.Count();
             ViewBag.FirstName = HttpContext.Session.GetString("FirstName");
             ViewBag.ProfileImage = HttpContext.Session.GetString("ProfileImage");
 
 
             return View();
         }
+
+        public IActionResult Profile(decimal UserId)
+        {
+       
+            return View();
+        }
+
+
     }
 }
